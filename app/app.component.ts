@@ -3,8 +3,14 @@ import {Component,OnInit} from '@angular/core'
     selector:'my-app',
     template:`
         <h1>{{title}}</h1>
-        <my-heroes> Loading </my-heroes>
-    `
+        <nav>
+            <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <a routerLink="/heroes" routerLinlActive="active">Heroes</a>
+        </nav>
+        <router-outlet></router-outlet>
+        
+    `,
+    styleUrls:['app/app.component.css'],
 })
 export class AppComponent{
     title = 'Tour of Heroes';
