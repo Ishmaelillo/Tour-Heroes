@@ -14,7 +14,7 @@ export class DashboardComponent {
         private router: Router,
         private heroService:HeroService){}
     ngOnInit(): void{
-        this.heroService.getHeroes().then(heroes=>this.heroes=heroes.slice(0,6));
+        this.heroService.getHeroes().then(heroes=>this.heroes=heroes.slice(1,5));
     }
     gotoDetail(hero:Hero): void{/*not implemented yet*/
         let link = ['/detail',hero.id];

@@ -10,40 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var common_1 = require('@angular/common');
 var hero_service_1 = require('./hero.service');
 var HeroDetailComponent = (function () {
-    function HeroDetailComponent(heroService, route) {
+    function HeroDetailComponent(heroService, route, location) {
         this.heroService = heroService;
         this.route = route;
+        this.location = location;
     }
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             var id = +params['id'];
-            _this.heroService.getHero(id).then(function (hero) { return _this.hero = hero; });
+            _this.heroService.getHero(id)
+                .then(function (hero) { return _this.hero = hero; });
         });
     };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
+    };
     HeroDetailComponent.prototype.goBack = function () {
-        window.history.back();
+        this.location.back();
     };
     HeroDetailComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'my-hero-detail',
-            /*template: `
-              <div *ngIf="hero">
-                <h2>{{hero.name}} details!</h2>
-                <div><label>id: </label>{{hero.id}}</div>
-                <div>
-                  <label>name: </label>
-                  <input [(ngModel)]="hero.name" placeholder="name"/>
-                </div>
-                <button (click)="goBack()">BAck</button>
-              </div>
-            `*/
-            templateUrl: 'app/hero-detail.component.html',
-            styleUrls: ['app/hero-detail.component.css']
+            templateUrl: 'hero-detail.component.html',
+            styleUrls: ['hero-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.ActivatedRoute, common_1.Location])
     ], HeroDetailComponent);
     return HeroDetailComponent;
 }());
